@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './demo-home.component.html',
-  styleUrls: ['./demo-home.component.css']
+  template: `
+    <h1>欢迎访问演示程序</h1>
+  `
 })
 export class DemoHomeComponent implements OnInit {
 

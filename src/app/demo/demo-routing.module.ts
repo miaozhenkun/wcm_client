@@ -6,18 +6,10 @@ import { DemoHomeComponent }    from './demo-home.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/demo',
-    pathMatch: 'full'
-  },
-  {
     path: 'demo',
     component: DemoComponent,
     children: [
-      {
-        path: '',
-        component: DemoHomeComponent
-      }
+      {path: '', component: DemoHomeComponent}
     ]
   }
 ];
@@ -27,8 +19,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    DemoComponent,
-    DemoHomeComponent
   ],
   exports: [
     RouterModule

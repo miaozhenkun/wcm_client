@@ -8,6 +8,8 @@
     [src]="hero.image"
     alt="{{hero.name}}">
   <div style="padding: 5px;">
-    <p class="card-text">{{hero.desc}}</p>
+    <p class="card-text"
+      data-toggle="tooltip" title="{{hero.desc}}"
+      >{{hero.desc}}</p>
   </div>
 </div>

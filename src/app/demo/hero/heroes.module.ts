@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
-import { HeroRoutingModule } from './heroes-routing.module';
+import { DemoHeroRoutingModule } from './heroes-routing.module'
 
 import { HeroComponent } from './hero.component';
 import { DemoHeroListComponent } from './demo-hero-list/demo-hero-list.component';
@@ -17,7 +17,7 @@ import { DemoHeroService } from './service/demo-hero.service';
     CommonModule,
     FormsModule,
     NgbModule.forRoot(),
-    HeroRoutingModule
+    DemoHeroRoutingModule
   ],
   declarations: [
     HeroComponent,
