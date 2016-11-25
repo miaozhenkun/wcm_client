@@ -1,0 +1,13 @@
+<div class="card" *ngIf="hero.id"
+  style="width: 200px;">
+  <div style="padding: 5px;">
+    <h4 class="card-title">{{hero.name}}</h4>
+  </div>
+  <img class="card-img-top"
+    style="width: 100%"
+    [src]="hero.image"
+    alt="{{hero.name}}">
+  <div style="padding: 5px;">
+    <p class="card-text">{{hero.desc}}</p>
+  </div>
+</div>

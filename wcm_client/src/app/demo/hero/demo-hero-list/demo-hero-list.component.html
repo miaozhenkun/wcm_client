@@ -1,0 +1,22 @@
+<h1>我的英雄</h1>
+<br>
+<p *ngIf="!heroes">加载中...</p>
+
+<div class="row">
+  <div class="col-xs-3">
+    <div class="list-group">
+      <button *ngFor="let hero of heroes"
+        type="button"
+        class="list-group-item list-group-item-action"
+        (click)="selectHero = hero"
+      >
+      {{hero.name}}</button>
+    </div>
+  </div>
+  <div class="col-xs-9">
+    <app-demo-hero-detail
+      [hero]="selectHero"></app-demo-hero-detail>
+  </div>
+</div>
+
+
