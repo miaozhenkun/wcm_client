@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { DemoHeroRoutingModule } from './heroes-routing.module'
@@ -16,7 +15,6 @@ import { DemoHeroService } from './service/demo-hero.service';
   imports: [
     CommonModule,
     FormsModule,
-    NgbModule.forRoot(),
     DemoHeroRoutingModule
   ],
   declarations: [
