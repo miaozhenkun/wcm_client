@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params }   from '@angular/router';
 
 import { WcmWebsiteService } from '../service/wcm-website.service'
 
@@ -33,7 +34,8 @@ import { WCMChannel } from '../model/WCMChannel'
           [ngClass]="{active: website.id === websiteSelect.id}"
           >
           <img class="card-img-top" [src]="website.logo" alt="英雄杀">
-          <div class="text" (click)="websitSelect(website)">
+          <div class="text"
+            [routerLink]="['/website', website.id]">
             <h4>{{website.name}}</h4>
             <p>{{website.desc}}</p>
           </div>
@@ -54,20 +56,16 @@ import { WCMChannel } from '../model/WCMChannel'
 
         </div>
       </div>
-
-      <!-- 栏目列表 -->
-      <div class="col-xs-3 placeholder">
-        <website-channel-list
-          [websiteId]='websiteSelect? websiteSelect.id: null'
-          (onChannelSelect)="onChannelSelect($event)"
-          ></website-channel-list>
-      </div>
-
-      <!-- 文档列表 -->
-      <div class="col-xs-8 placeholder">
-        <website-doc-list
-          [channelId]='channelSelect? channelSelect.id : null'
-          ></website-doc-list>
+      
+      <!-- 右侧部分 -->
+      <div class="col-xs-11 placeholder">
+        <div class="row" *ngIf="websiteSelect">
+          <a [routerLink]="[websiteSelect.id, 'channel']">栏目管理</a>
+          <a [routerLink]="[websiteSelect.id, 'template']">模板管理</a>
+        </div>
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div>
       </div>
 
     </div>
@@ -82,14 +80,18 @@ import { WCMChannel } from '../model/WCMChannel'
 export class WebsiteMainComponent implements OnInit {
 
   // 选中的站点
-  websiteSelect: WCMWebsite;
+  websiteSelect: any;
   // 选中的栏目
   channelSelect: WCMChannel;
 
   // 站点列表
   websites: WCMWebsite[];
 
-  constructor(private wcmWebsiteService: WcmWebsiteService) { }
+  constructor(
+    private wcmWebsiteService: WcmWebsiteService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   // 初始化
   ngOnInit() {
@@ -100,21 +102,19 @@ export class WebsiteMainComponent implements OnInit {
       {id: 3, name: '站点3', alias: 'website3', describe: '站点2描述', logo: 'assets/imgs/heroes/xiangyu.jpg'}
     ];
 
-    if(this.websites.length > 0){
-      this.websiteSelect = this.websites[0];
-    }
+    
+    let _this = this;
+    
+    this.route.params
+      .subscribe(function(params){
+        console.dir(1);
+        if(_this.websites.length > 0){
+          _this.websiteSelect = _this.websites[0];
+          _this.router.navigate(['website', _this.websiteSelect.id]);
+        }
+      });
+    
 
-  }
-
-  // 站点选中
-  websitSelect(website){
-    this.websiteSelect = website;
-    this.channelSelect = null;
-  }
-
-  // 栏目选中
-  onChannelSelect(channel: WCMChannel){
-    this.channelSelect =  channel;
   }
 
   // 新建站点

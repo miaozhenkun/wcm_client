@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Params }   from '@angular/router';
 
 import { WCMDoc } from '../../model/WCMDoc'
 
@@ -37,11 +38,19 @@ export class DocListComponent implements OnInit {
   isLoadData: boolean;
 
   constructor(
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     //TODO 根据栏目id加载文档列表
-
+    
+    let _this = this;
+    
+    this.route.params
+      .subscribe(function(params){
+        _this.channelId = params['channelId'];
+        _this.loadDocs();
+      });
   }
 
   // 输入变化

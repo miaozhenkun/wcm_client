@@ -8,8 +8,9 @@ import { WcmRoutingModule } from './wcm-routing.module'
 import { UtilLoadingComponent } from '../common/util/util-loading.component';
 
 import { WebsiteMainComponent } from './website/wcm-website-main.component';
-import { ChannelListComponent } from './website/channel/channel-list.component'
-import { DocListComponent } from './website/doc/doc-list.component'
+import { ChannelListComponent } from './website/channel/channel-list.component';
+import { TemplateListComponent } from './website/template/template-list.component'
+import { DocListComponent } from './website/doc/doc-list.component';
 
 import { WcmWebsiteService } from './service/wcm-website.service'
 
@@ -24,6 +25,7 @@ import { WcmWebsiteService } from './service/wcm-website.service'
     UtilLoadingComponent,
     WebsiteMainComponent,
     ChannelListComponent,
+    TemplateListComponent,
     DocListComponent
   ],
   providers: [

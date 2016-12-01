@@ -2,26 +2,29 @@ import { NgModule }                 from '@angular/core';
 import { RouterModule, Routes }     from '@angular/router';
 
 import { WebsiteMainComponent }     from './website/wcm-website-main.component';
-import { ChannelListComponent } from './website/channel/channel-list.component'
+import { ChannelListComponent } from './website/channel/channel-list.component';
+import { TemplateListComponent } from './website/template/template-list.component';
+import { DocListComponent } from './website/doc/doc-list.component';
+
 
 const routes: Routes = [
-    {
-      path: '',
-      component: WebsiteMainComponent
-    },
+    {path: '', component: WebsiteMainComponent},
     {
       // 站点管理
-      path: 'website',
-      component: WebsiteMainComponent,
+      path: 'website', component: WebsiteMainComponent,
       children: [
         {
+          // 站点管理
           path: ':websiteId',
-          component: ChannelListComponent,
           children: [
+            {path: '',  redirectTo: 'channel', pathMatch: 'full'},
             {
-              path: ':channelId',
-              component: WebsiteMainComponent
-            }
+              path: 'channel', component: ChannelListComponent,
+              children: [
+                {path: ':channelId', component: DocListComponent}
+              ]
+            },
+            {path: 'template', component: TemplateListComponent}
           ]
         }
       ]
