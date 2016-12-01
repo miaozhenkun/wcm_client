@@ -3,7 +3,7 @@
 <p *ngIf="!heroes">加载中...</p>
 
 <div class="row">
-  <div class="col-xs-3">
+  <div class="col-xs-8">
     <div class="list-group">
       <button *ngFor="let hero of heroes"
         type="button"
@@ -12,11 +12,17 @@
       >
       {{hero.name}}</button>
     </div>
+    <pagination [totalItems]="totalItems" [maxSize]="maxSize" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" [firstText]="firstText" [lastText]="lastText" [previousText]="previousText" [nextText]="nextText" [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event" (pageChanged)="pageChanged($event)" class="pagination-sm" ></pagination>
+  <app-write-post></app-write-post>
   </div>
-  <div class="col-xs-9">
+  <div class="col-xs-4">
     <app-demo-hero-detail
       [hero]="selectHero"></app-demo-hero-detail>
+      <app-sitestat></app-sitestat>
+      <app-add-comment></app-add-comment>
+      
   </div>
+  
 </div>
 
 

@@ -9,10 +9,14 @@ import { Hero } from '../model/hero';
 export class DemoHeroDetailComponent implements OnInit {
 
   @Input() hero: Hero;
+  
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit() {
+  	
   }
 
 }
