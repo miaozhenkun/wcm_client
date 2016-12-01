@@ -1,6 +1,7 @@
 {
-  "/api": {
-    "target": "http://localhost:3000",
-    "secure": false
+  "/appointapi": {
+    "target": "http://119.61.64.104:8777/api-mobile/api",
+    "secure": false,
+    "pathRewrite": {"^/appointapi" : ""}
   }
 }

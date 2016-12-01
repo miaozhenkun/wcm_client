@@ -9,6 +9,8 @@ import { DemoHeroSanguoModule } from './hero-sanguo/heroes-sanguo.module';
 import { DemoComponent }    from './demo.component';
 import { DemoHomeComponent }    from './demo-home.component';
 
+import { DemoService } from './service/demo.service'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { DemoHomeComponent }    from './demo-home.component';
     DemoHomeComponent
   ],
   providers: [
+    DemoService
   ]
 })
 export class DemoModule { }

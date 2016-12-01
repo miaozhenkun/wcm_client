@@ -13,9 +13,6 @@ const routes: Routes = [
         {
           path: 'hero-sanguo',
           component: HeroSanguoComponent,
-          children: [
-            { path: '', component: HeroSanguoComponent }
-          ]
         }
       ]
     }

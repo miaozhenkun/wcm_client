@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { WcmWebsiteService } from '../service/wcm-website.service'
+
 import { WCMWebsite } from '../model/WCMWebsite'
 import { WCMChannel } from '../model/WCMChannel'
 
@@ -12,6 +14,9 @@ import { WCMChannel } from '../model/WCMChannel'
         <li *ngIf="websiteSelect" class="active">{{websiteSelect.name}}</li>
         <li *ngIf="channelSelect" class="active">{{channelSelect.name}}</li>
       </ol>
+
+      <span *ngIf="errorMessage" color="red">{{errorMessage}}</span>
+
     </div>
     <div class="row website-list">
 
@@ -84,8 +89,7 @@ export class WebsiteMainComponent implements OnInit {
   // 站点列表
   websites: WCMWebsite[];
 
-  constructor(
-  ) { }
+  constructor(private wcmWebsiteService: WcmWebsiteService) { }
 
   // 初始化
   ngOnInit() {
