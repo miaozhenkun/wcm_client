@@ -23,10 +23,25 @@ import { WCMDoc } from '../../model/WCMDoc'
         <td>{{doc.createTime}}</td>
       </tr>
     </table>
+    
+  <pagination [totalItems]="totalItems" [maxSize]="maxSize" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" 
+
+[firstText]="firstText" [lastText]="lastText" [previousText]="previousText" [nextText]="nextText" [boundaryLinks]="true" [rotate]="false" 
+
+(numPages)="numPages = $event" (pageChanged)="pageChanged($event)" class="pagination-sm" ></pagination>
   </div>
   `
 })
 export class DocListComponent implements OnInit {
+  public maxSize:number = 5;
+  public itemsPerPage:number=5;
+  public totalItems:number = 15;
+  public currentPage:number = 1;
+
+  public firstText:string="首页";
+  public lastText:string="尾页";
+  public previousText:string="上一页";
+  public nextText:string="下一页";   
 
   // 栏目id
   @Input() channelId: string;
