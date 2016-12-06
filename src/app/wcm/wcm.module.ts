@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { TreeModule } from 'angular2-tree-component';
 
-import { PaginationModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+
+import { UtilModule } from '../common/util/util.module';
 
 import { WcmRoutingModule } from './wcm-routing.module'
-
-import { UtilLoadingComponent } from '../common/util/util-loading.component';
 
 import { WebsiteMainComponent } from './website/wcm-website-main.component';
 import { AddWebsiteContent } from './website/wcm-website-add.component';
@@ -31,10 +30,10 @@ import { WcmWebsiteService } from './service/wcm-website.service'
     FormsModule,
     TreeModule,
     HttpModule,
+    UtilModule,
     WcmRoutingModule
   ],
   declarations: [
-    UtilLoadingComponent,
     WebsiteMainComponent,
     ChannelListComponent,
     WritePostComponent,
@@ -42,12 +41,11 @@ import { WcmWebsiteService } from './service/wcm-website.service'
     DocListComponent,
     AddWebsiteContent,
     TemplateComponent
-
   ],
   providers: [
     WcmWebsiteService
   ]
 })
-export class WCMModule { 
+export class WCMModule {
 
 }

@@ -1,12 +1,18 @@
 import { NgModule }                 from '@angular/core';
 import { RouterModule, Routes }     from '@angular/router';
 
+import { AuthGuardLogin }                from './common/security/auth-guard-login.service';
+
+import { UserLoginComponent }            from './common/security/user-login.component';
 import { HomeComponent }            from './common/home/home.component';
 import { PageNotFoundComponent }    from './common/page-not-found/page-not-found.component';
 
 // 路由
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }
+  // 登录
+  { path: 'login', component: UserLoginComponent},
+  // 首页
+  { path: '', component: HomeComponent, canActivateChild: [AuthGuardLogin] }
   //{ path: '**', component: PageNotFoundComponent }
 ];
 
@@ -15,8 +21,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [
-  	HomeComponent,
-  	PageNotFoundComponent
   ],
   exports: [
     RouterModule
