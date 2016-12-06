@@ -30,6 +30,10 @@
 * `npm start`
 默认调用package.json中start配置命令。
 
+
+* `npm install --save angular2-tree-component`
+安装tree组件
+
 # 其他说明
 
 * `src/assets`目录中的文件以及目录会在ng build之后，完全拷贝到`dist/assets`目录中。

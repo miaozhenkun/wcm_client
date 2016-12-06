@@ -13,6 +13,14 @@ export class WcmWebsiteService {
                     .map(this.extractData)
                     .catch(this.handleError);
   }
+  
+	//标准查询列表接口
+	getWjwmbList (): Observable<any> {
+    return this.http.get("wjwmbapi/standardsearch/list")
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+  
   private extractData(res: Response) {
     let body = res.json();
     return body || { };
