@@ -5,6 +5,7 @@ import { WebsiteMainComponent }     from './website/wcm-website-main.component';
 import { ChannelListComponent } from './website/channel/channel-list.component';
 import { TemplateListComponent } from './website/template/template-list.component';
 import { DocListComponent } from './website/doc/doc-list.component';
+import { TemplateComponent } from './website/template/template-degtail.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,12 @@ const routes: Routes = [
                 {path: ':channelId', component: DocListComponent}
               ]
             },
-            {path: 'template', component: TemplateListComponent}
+            {path: 'template', component: TemplateListComponent,
+             children: [
+                {path: ':templateId', component: TemplateComponent}
+              ]
+            }
+          
           ]
         }
       ]
