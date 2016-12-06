@@ -34,14 +34,14 @@ import { AddWebsiteContent } from './wcm-website-add.component'
 
         <div
           class="websit-list"
-          *ngFor="let website of websites"
+          *ngFor="let website of websiteList?.data"
           [ngClass]="{active: website.id === websiteSelect.id}"
           (click)='clickWebsite(website)'
           >
-          <img class="img-rounded" width='50px' height='50px' [src]="website.logo" alt="英雄杀">
+          <img class="img-rounded" width='50px' height='50px' src="assets/imgs/heroes/xiangyu.jpg" alt="英雄杀">
           <div class="text"
             [routerLink]="['/website', website.id]">
-            <h4>{{website.name}}</h4>
+            <h4>{{website.dataId.substr(website.dataId.length-4)}}</h4>
             <p>{{website.desc}}</p>
           </div>
 
@@ -61,7 +61,8 @@ import { AddWebsiteContent } from './wcm-website-add.component'
 
         </div>
       </div>
-      
+      <!--{{websiteList==null?"":websiteList.msg}}
+      {{websiteList?.msg}}-->
       <!-- 右侧部分 -->
       <div class="col-xs-11 placeholder">
         <div class="row" *ngIf="websiteSelect">
@@ -93,7 +94,8 @@ export class WebsiteMainComponent implements OnInit {
   // 站点列表
   websites: WCMWebsite[];
   
-  websitesName: any;
+  public websiteList: any;
+  public errorMessage: any;
 
   constructor(
     private wcmWebsiteService: WcmWebsiteService,
@@ -127,11 +129,12 @@ export class WebsiteMainComponent implements OnInit {
   }
   
   //获取站点
-  getWebsitesList(): Observable<any> {
-  	let url="http://192.168.1.252:9301/wjwmb/api/standardsearch/list";
-  	console.info("start");
-    return this.http.get(url)
-                    .map((res: Response)=>this.websitesName=res.json());
+  getWebsitesList(): void {
+    this.wcmWebsiteService.getWjwmbList()
+      .subscribe(
+        datas => this.websiteList = datas,
+        error =>  this.errorMessage = <any>error);
+
   }
   
   
