@@ -1,21 +1,6 @@
 import { NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { PaginationModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { TabsModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { TooltipModule } from 'ng2-bootstrap/ng2-bootstrap';
-
-import { WcmRoutingModule } from './wcm-routing.module'
-
-import { TreeModule } from 'angular2-tree-component';
-
-
 
 import { UtilModule } from '../common/util/util.module';
-
 import { WcmRoutingModule } from './wcm-routing.module'
 
 import { WebsiteMainComponent } from './website/wcm-website-main.component';
@@ -33,14 +18,6 @@ import { WcmWebsiteService } from './service/wcm-website.service'
 
 @NgModule({
   imports: [
-    CommonModule,
-    PaginationModule,
-    TooltipModule,
-    TabsModule,
-    ModalModule,
-    FormsModule,
-    TreeModule,
-    HttpModule,
     UtilModule,
     WcmRoutingModule
   ],

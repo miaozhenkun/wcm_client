@@ -147,9 +147,7 @@ loaddata(){
      this.wcmWebsiteService.getAppointDoctors()
       .subscribe(
         datas => this.doctorlist = datas,
-        setTimeout(() => {
-         this.isLoadData = false;
-       }, 0),
+       
         error =>  this.errorMessage = <any>error);
          //console.dir(this.doctorlist);
     
