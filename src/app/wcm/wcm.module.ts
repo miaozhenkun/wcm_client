@@ -25,7 +25,6 @@ import { WcmWebsiteService } from './service/wcm-website.service'
 @NgModule({
   imports: [
     CommonModule,
-    PaginationModule,
     ModalModule,
     FormsModule,
     TreeModule,
