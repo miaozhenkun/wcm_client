@@ -1,4 +1,9 @@
 {
+  "/api": {
+    "target": "http://192.168.1.252:8101/sinowcm/mgr",
+    "secure": false,
+    "pathRewrite": {"^/api" : ""}
+  },
   "/appointapi": {
     "target": "http://119.61.64.104:8777/api-mobile/api",
     "secure": false,
