@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { PaginationModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { TabsModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { TooltipModule } from 'ng2-bootstrap/ng2-bootstrap';
+
 import { WcmRoutingModule } from './wcm-routing.module'
 
 import { UtilLoadingComponent } from '../common/util/util-loading.component';
@@ -24,6 +27,8 @@ import { WcmWebsiteService } from './service/wcm-website.service'
   imports: [
     CommonModule,
     PaginationModule,
+    TooltipModule,
+    TabsModule,
     ModalModule,
     FormsModule,
     HttpModule,

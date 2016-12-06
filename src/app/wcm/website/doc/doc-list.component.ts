@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ViewChild} from '@angular/core';
+import { Component, OnInit, Input,ViewChild,ChangeDetectionStrategy} from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 //import { ModalDirective } from '../../../components/modal/modal.component';
 import { WCMDoc } from '../../model/WCMDoc'
@@ -10,21 +10,40 @@ import { WcmWebsiteService } from '../../service/wcm-website.service'
   template: `
   <util-loading [isShow]="isLoadData"></util-loading>
   <div class="panel-heading" *ngIf="channelId">文档列表-{{channelId}}</div>
-    
-    
-    
-    
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" *ngIf="channelId">
-    发表文档
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" *ngIf="channelId" float:left>
+      发表文档
     </button>
+  
+  
+
+
+ 
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-content">
+     <app-write-post></app-write-post>
+       <div class="modal-footer">
+       
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">提交</button>
+      
+       </div>
+    </div>
+</div>
   <div class="panel panel-default" *ngIf="!isLoadData && channelId&&doctorlist">
     <div class="input-group">
-                    <input class="form-control" type="text" placeholder="搜索" [(ngModel)]="searchText" (keyup)="searchChanged($event)" id="searchText" name="searchText">
+                    <input class="form-control" type="text" placeholder="搜索" [(ngModel)]="searchText" (keyup)="searchChanged($event)" id="searchText" name="searchText"
+                    tooltip="输入检索文档的名字"
+           tooltipPlacement="top"
+           tooltipTrigger="mouseenter"
+           [tooltipEnable]="!inputModel || inputModel.length==0"
+                    
+                    >
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true" ></i> 搜索</button>
                     </span>
     </div>
-    <table class="table table-striped">
+    <table class="table table-bordered table-hover table-striped">
       <tr>
        
         <td>文档详情</td>
@@ -50,22 +69,8 @@ import { WcmWebsiteService } from '../../service/wcm-website.service'
 [firstText]="firstText" [lastText]="lastText" [previousText]="previousText" [nextText]="nextText" [boundaryLinks]="true" [rotate]="false" 
 
 (numPages)="numPages = $event" (pageChanged)="pageChanged($event)" class="pagination-sm" ></pagination>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  
-    <div class="modal-content">
-     <app-write-post></app-write-post>
-       <div class="modal-footer">
-       
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">提交</button>
-      
-    </div>
-    
-  </div>
-
-</div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocListComponent implements OnInit, Input {
   public doctorlist: any;
@@ -85,10 +90,6 @@ export class DocListComponent implements OnInit, Input {
 
   // 栏目id
   @Input() channelId: string;
-
-  // 文档列表
-  docs: WCMDoc[];
-
   // 加载数据状态
   isLoadData: boolean;
 
@@ -104,8 +105,8 @@ export class DocListComponent implements OnInit, Input {
     this.route.params
       .subscribe(function(params){
         _this.channelId = params['channelId'];
-       
-        _this.loaddata();
+        _this.loadDocs();
+        //_this.loaddata();
       });
    
   
@@ -128,8 +129,9 @@ export class DocListComponent implements OnInit, Input {
     //this.loaddata();
   };
 
-  // 加载栏目数据
-  loadDocs(){
+// 加载栏目数据
+loadDocs(){
+    
     if(!this.channelId){
       return;
     }
@@ -138,8 +140,8 @@ export class DocListComponent implements OnInit, Input {
       this.isLoadData = false;
     }, 500);
 
-  }
-  loaddata(){
+}
+loaddata(){
     
     this.isLoadData = true;
      this.wcmWebsiteService.getAppointDoctors()
@@ -152,7 +154,7 @@ export class DocListComponent implements OnInit, Input {
          //console.dir(this.doctorlist);
     
     
-  }
+}
   
 
 }

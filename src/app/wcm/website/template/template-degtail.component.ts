@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ViewChild} from '@angular/core';
+import { Component, OnInit, Input,ViewChild,ChangeDetectionStrategy} from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 //import { ModalDirective } from '../../../components/modal/modal.component';
 import { WCMDoc } from '../../model/WCMDoc'
@@ -10,44 +10,34 @@ import { WcmWebsiteService } from '../../service/wcm-website.service'
   template: `
   <util-loading [isShow]="isLoadData"></util-loading>
   <div class="panel-heading" *ngIf="templateId">模板详情-{{templateId}}</div>
+   <tabset>
+   <tab heading="我是模板详情"><a href ="www.baidu.com">模板详情</a></tab>
+    <tab *ngFor="let tabz of tabs"
+         [heading]="tabz.title"
+         [active]="tabz.active"
+         (select)="tabz.active = true"
+         (deselect)="tabz.active = false"
+         [disabled]="tabz.disabled"
+         [removable]="tabz.removable"
+         (removed)="removeTabHandler(tabz)"
+         [customClass]="tabz.customClass">
+      {{tabz?.content}}
+    </tab>
+  </tabset>
+ 
 
-  <div class="panel panel-default" *ngIf="!isLoadData && templateId&&doctorlist">
-
-
-
-  <pagination [totalItems]="totalItems" [maxSize]="maxSize" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" 
-
-[firstText]="firstText" [lastText]="lastText" [previousText]="previousText" [nextText]="nextText" [boundaryLinks]="true" [rotate]="false" 
-
-(numPages)="numPages = $event" (pageChanged)="pageChanged($event)" class="pagination-sm" ></pagination>
-</div>
   `
 })
 export class TemplateComponent implements OnInit, Input {
   public doctorlist: any;
   public errorMessage: any;
-  
-  
-  //分页
-  public maxSize:number = 10;
-  public itemsPerPage:number=10;
-  public totalItems:number = 200;
-  public currentPage:number = 1;
-
-  public firstText:string="首页";
-  public lastText:string="尾页";
-  public previousText:string="上一页";
-  public nextText:string="下一页";   
 
   // 模板id
   @Input() templateId: string;
-  // 文档列表
-  docs: WCMDoc[];
-
   // 加载数据状态
   isLoadData: boolean;
 
-  public constructor( private route: ActivatedRoute,private wcmWebsiteService:WcmWebsiteService) { 
+  public constructor( private route: ActivatedRoute) { 
  
   }
 
@@ -82,32 +72,26 @@ export class TemplateComponent implements OnInit, Input {
     console.log(event);
     //this.loaddata();
   };
+  public tabs:Array<any> = [
+    {title: '基本信息', content: 'Dynamic content 1' ,select:true},
+    {title: '修订历史', content: 'Dynamic content 4', customClass: 'customClass'}
+  ];
+ 
+  public alertMe():void {
+    setTimeout(function ():void {
+      alert('You\'ve selected the alert tab!');
+    });
+  };
+ 
+  public setActiveTab(index:number):void {
+    this.tabs[index].active = true;
+  };
+ 
+  public removeTabHandler(/*tab:any*/):void {
+    console.log('Remove Tab handler');
+  };
 
-  // 加载栏目数据
-//loadDocs(){
-//  if(!this.templateId){
-//    return;
-//  }
-//  this.isLoadData = true;
-//  setTimeout(() => {
-//    this.isLoadData = false;
-//  }, 500);
-//
-//}
-//loaddata(){
-//  
-//  this.isLoadData = true;
-//   this.wcmWebsiteService.getAppointDoctors()
-//    .subscribe(
-//      datas => this.doctorlist = datas,
-//      setTimeout(() => {
-//       this.isLoadData = false;
-//     }, 0),
-//      error =>  this.errorMessage = <any>error);
-//       //console.dir(this.doctorlist);
-//  
-//  
-//}
+
   
 
 }
