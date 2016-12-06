@@ -2,6 +2,7 @@ import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { TreeModule } from 'angular2-tree-component';
 
 import { PaginationModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -28,6 +29,7 @@ import { WcmWebsiteService } from './service/wcm-website.service'
     PaginationModule,
     ModalModule,
     FormsModule,
+    TreeModule,
     HttpModule,
     WcmRoutingModule
   ],
