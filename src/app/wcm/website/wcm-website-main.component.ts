@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
+import { Http, Response } from '@angular/http';
+import { Observable }     from 'rxjs/Observable';
 
 import { WcmWebsiteService } from '../service/wcm-website.service'
 
 import { WCMWebsite } from '../model/WCMWebsite'
 import { WCMChannel } from '../model/WCMChannel'
+import { AddWebsiteContent } from './wcm-website-add.component'
 
 @Component({
   selector: 'websitemgr',
@@ -24,19 +27,21 @@ import { WCMChannel } from '../model/WCMChannel'
       <!-- 站点列表 -->
       <div class="col-xs-1 placeholder">
 
-        <button type="button" class="btn btn-success">
+        <button type="button" class="btn btn-success" (click)="showAddWebsite()">
           <span class="glyphicon glyphicon-plus"></span> 新建站点
         </button>
 
+
         <div
           class="websit-list"
-          *ngFor="let website of websites"
+          *ngFor="let website of websiteList?.data"
           [ngClass]="{active: website.id === websiteSelect.id}"
+          (click)='clickWebsite(website)'
           >
-          <img class="card-img-top" [src]="website.logo" alt="英雄杀">
+          <img class="img-rounded" width='50px' height='50px' src="assets/imgs/heroes/xiangyu.jpg" alt="英雄杀">
           <div class="text"
             [routerLink]="['/website', website.id]">
-            <h4>{{website.name}}</h4>
+            <h4>{{website.dataId.substr(website.dataId.length-4)}}</h4>
             <p>{{website.desc}}</p>
           </div>
 
@@ -56,7 +61,8 @@ import { WCMChannel } from '../model/WCMChannel'
 
         </div>
       </div>
-      
+      <!--{{websiteList==null?"":websiteList.msg}}
+      {{websiteList?.msg}}-->
       <!-- 右侧部分 -->
       <div class="col-xs-11 placeholder">
         <div class="row" *ngIf="websiteSelect">
@@ -77,6 +83,7 @@ import { WCMChannel } from '../model/WCMChannel'
     .website-handle{position: absolute; right: 0px; top: 0px;}
   `]
 })
+
 export class WebsiteMainComponent implements OnInit {
 
   // 选中的站点
@@ -86,12 +93,16 @@ export class WebsiteMainComponent implements OnInit {
 
   // 站点列表
   websites: WCMWebsite[];
+  
+  public websiteList: any;
+  public errorMessage: any;
 
   constructor(
     private wcmWebsiteService: WcmWebsiteService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private http: Http
+  ) {}
 
   // 初始化
   ngOnInit() {
@@ -113,8 +124,27 @@ export class WebsiteMainComponent implements OnInit {
           _this.router.navigate(['website', _this.websiteSelect.id]);
         }
       });
-    
+   
+		this.getWebsitesList();
+  }
+  
+  //获取站点
+  getWebsitesList(): void {
+    this.wcmWebsiteService.getWjwmbList()
+      .subscribe(
+        datas => this.websiteList = datas,
+        error =>  this.errorMessage = <any>error);
 
+  }
+  
+  
+  public showAddWebsite():void{
+
+  }
+  
+
+  clickWebsite(website:WCMWebsite):void{
+  	this.websiteSelect=website;
   }
 
   // 新建站点

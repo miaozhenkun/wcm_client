@@ -8,5 +8,10 @@
     "target": "http://119.61.64.104:8777/api-mobile/api",
     "secure": false,
     "pathRewrite": {"^/appointapi" : ""}
+  },
+  "/wjwmbapi": {
+    "target": "http://192.168.1.252:9301/wjwmb/api",
+    "secure": false,
+    "pathRewrite": {"^/wjwmbapi" : ""}
   }
 }

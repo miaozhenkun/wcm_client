@@ -18,10 +18,10 @@ import { WCMChannel } from '../../model/WCMChannel'
   
       <ul class="list-group" *ngIf="!isLoadData">
         <li class="list-group-item"
-          *ngFor="let channel of channels"
-          [routerLink]="[channel.id]"
-          [ngClass]="{active: channel.id === channelSelect ? channelSelect.id : null}"
-          >{{channel.name}}
+          *ngFor="let templat of templats"
+          [routerLink]="[templat.id]"
+          [ngClass]="{active: templat.id === channelSelect ? channelSelect.id : null}"
+          >{{templat.name}}
   
             <!-- 操作 -->
             <div class="btn-group website-handle">
@@ -42,7 +42,7 @@ import { WCMChannel } from '../../model/WCMChannel'
     </div>
   </div>
   
-  <div class="col-xs-9 placeholder">
+  <div class="col-xs-9 placeholder">    
     <router-outlet></router-outlet>
   </div>
   
@@ -52,12 +52,12 @@ import { WCMChannel } from '../../model/WCMChannel'
   `]
 })
 export class TemplateListComponent implements OnInit {
-
+ 
   // 站点id
   websiteId: string;
 
   // 模板列表
-  channels: WCMChannel[];
+  templats: WCMChannel[];
   // 加载数据状态
   isLoadData: boolean;
 
@@ -83,13 +83,13 @@ export class TemplateListComponent implements OnInit {
   // 加载模板数据
   loadChannels(){
     if(!this.websiteId){
-      this.channels = [];
+      this.templats = [];
       return;
     }
     this.isLoadData = true;
 
     setTimeout(() => {
-      this.channels = [
+      this.templats = [
         {id: 1, parentId: null, websiteId: 1, name: '模板1', alias: 'channel1'},
         {id: 2, parentId: null, websiteId: 1, name: '模板2', alias: 'channel2'},
         {id: 3, parentId: null, websiteId: 1, name: '模板3', alias: 'channel3'},
